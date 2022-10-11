@@ -10,25 +10,42 @@ getRepo.onclick = function () {
     setTimeout(() => {
       repositoriesInfo.innerHTML = "";
     }, 2000);
-  } else if (input.value == "haitam-skhairi") {
-    fetch("https://api.github.com/users/haitam-skhairi/repos")
+  } else {
+    fetch(`https://api.github.com/users/${input.value}/repos`)
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
         data.forEach((el) => {
-          let mainDiv = document.createElement("div");
+          let repo = document.createElement("div");
+          repo.className = "repo";
+          // Repo Name
+          let repoName = document.createElement("span");
+          let repoNameText = document.createTextNode(
+            `Repositories: ${el.name}`
+          );
+          repoName.className = "repo-name";
 
-          let name = document.createElement("span");
-          let mainDivText = document.createTextNode(`Repositories: ${el.name}`);
+          // Repo Info
+          let repoInfo = document.createElement("div");
+          repoInfo.className = "repo-info";
+          let repoVisibility = document.createElement("span");
+          repoVisibility.className = "repo-visibility";
+          repoVisibility.innerHTML = el.visibility;
+          let repoWatchers = document.createElement("span");
+          repoWatchers.className = "repo-watchers";
+          repoWatchers.innerHTML = `Watchers: ${el.watchers}`;
+
           // Append Main Div
-          mainDiv.appendChild(mainDivText);
-          repositoriesInfo.appendChild(mainDiv);
+          repo.appendChild(repoName);
+          repoName.appendChild(repoNameText);
+          repositoriesInfo.appendChild(repo);
+          repo.appendChild(repoInfo);
+          repoInfo.appendChild(repoVisibility);
+          repoInfo.appendChild(repoWatchers);
         });
       });
-  } else {
-    repositoriesInfo.innerHTML = `<div class="worning">Username not exist!</div>`;
-    setTimeout(() => {
-      repositoriesInfo.innerHTML = "";
-    }, 2000);
+
+    // Empty and focus in input
+    input.value = "";
+    input.focus();
   }
 };

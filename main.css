@@ -55,9 +55,44 @@ h1 {
 
 .repositories-info {
     background-color: #ddd;
-    padding: 20px;
+    padding: 10px;
     min-height: 400px;
     position: relative;
+}
+
+.repositories-info .repo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.repo .repo-info {
+    display: inline-block;
+}
+
+@media (max-width: 676px) {
+    .repo .repo-info {
+        margin-top: 10px
+    }
+}
+
+.repo .repo-info .repo-visibility {
+    padding: 5px;
+    background: green;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: bold;
+    margin-right: 5px;
+}
+.repo .repo-info .repo-watchers {
+    padding: 5px;
+    background: red;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: bold;
 }
 
 .worning {
